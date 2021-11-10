@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="blog.css" />
+    <link rel="icon" href="./assets/logo.png" />
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <title>Image Deconvolution: How it works and how to use it for microscopy</title>
+</head>
+
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <h6>
+                <a href="index.html#" class="nav-logo">Lumenbios<img src="./assets/logo.png" alt="" /></a>
+            </h6>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html#" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#AI-Analysis" class="nav-link">AI analysis</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#blog" class="nav-link">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#contact" class="nav-link">Contact us</a>
+                </li>
+                <li class="nav-button button nav-item">
+                    <a href="index.html#contact" class="nav-link">Get Started</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- scroll to top button -->
+    <a href="#" class="to-top">
+        <i class="uil uil-angle-double-up"></i>
+    </a>
+
+    <section class="blog">
+        <h1>Image Deconvolution: How it works and how to use it for microscopy</h1>
+        <h4>An introduction to deconvolution for biologists: what it is, how it works, tools for biologists to do
+            deconvolution, and more resources.</h4>
+        <img src="./assets/cover_image-3.png" alt="">
+        <p>If you’re familiar with microscopy imaging--particularly fluorescent imaging--you may have heard of
+            <b>deconvolution</b> as an image processing technique. But what exactly is deconvolution, and how does it
+            work? In
+            this article, we’ll cover the basics of deconvolution, methods for deconvolution, and where you can find
+            tools to apply deconvolution to your own images.
+        </p>
+        <h5>Contents:</h5>
+        <ol>
+            <li>1. What is Deconvolution?</li>
+            <li>2. How does Deconvolution work?</li>
+            <li>3. Why do Biologists use Deconvolution?</li>
+            <li>4. How can AI be used for Deconvolution?</li>
+            <li>5. Tools for Biologists to do Deconvolution</li>
+            <li>6. Learn more about Deconvolution</li>
+            <li>7. References</li>
+        </ol>
+        <h5>What is Deconvolution?</h5>
+        <p>In a nutshell, deconvolution is a post-processing step that makes images appear “sharper,” or more in focus,
+            and helps you resolve the finer details of your image.</p>
+        <p>When you collect an image with a microscope, the image you get isn’t a perfect representation of your
+            sample--it’s distorted, or convoluted, which can make the specimen you’re imaging appear blurry or out of
+            focus.</p>
+        <p>But let’s say you know exactly how your images are being convoluted by your imaging system. Hypothetically,
+            it should be possible to take a final image and “work backwards” to figure out what the original image would
+            have looked like pre-convolution.</p>
+        <p>This is what deconvolution does--it uses a mathematical algorithm to reverse convolution and generate a
+            sharper image. But where does the “convolution” come from, and how can it be reversed?</p>
+        <h5>How Does Deconvolution Work?</h5>
+        <p>The reason why images become convoluted has to do with the limits of microscopy imaging systems. As light
+            passes from your sample through the optical path of the microscope, it spreads out, or becomes
+            <b>diffracted</b>.
+            This creates <b>blur</b>, which causes the final image to appear less sharp.
+        </p>
+        <p>Because we understand how our imaging systems work, we can account for blur by modelling light diffraction.
+            This is primarily how deconvolution works--by removing blur. (For this reason deconvolution algorithms are
+            sometimes known as “deblurring” algorithms.)</p>
+        <img src="./assets/pasted image 0.png" alt="">
+        <p class="img-desc">Deconvolution works by modeling how images are distorted during acquisition, and removing
+            the distortion to estimate what the original sample would have looked like. (Image via Sage 2017)</p>
+        <h5>The Point Spread Function</h5>
+        <p>To model how blur affects an image, we use a point spread function (<b>PSF</b>). The PSF is simply the
+            mathematical
+            formula for how light spreads through a system after it is emitted from a certain point, or light source.
+        </p>
+        <p>Every imaging system has its own PSF, which can change based on the wavelength of light being collected, the
+            numerical aperture of your objective lens, and the refractive index of your immersion medium.</p>
+        <p>To achieve deconvolution, you typically need to figure out the point spread function of your system. One
+            option is to estimate your <b>theoretical PSF</b> based on a mathematical model of your system (using tools
+            like a
+            <a href="https://svi.nl/NyquistCalculator">PSF Calculator</a>, or the <a
+                href="https://imagej.net/plugins/diffraction-psf-3d">Diffraction PSF 3D</a>
+            plugin for ImageJ).
+        </p>
+
+        <img src="./assets/pasted image 0 (1).png" alt="">
+        <p class="img-desc">The PSF describes how your image is affected by blur. (Image via <a
+                href="https://commons.wikimedia.org/wiki/File:Convolution_Illustrated_eng.png">Wikimedia Commons</a>)
+        </p>
+        <p>The true PSF of your system, however, can be different from the theoretical estimate, so It’s usually
+            recommended that you measure your PSF experimentally. Measuring your <b>empirical PSF</b> involves taking
+            images of
+            small <a href="https://svi.nl/Recording-Beads">fluorescent beads</a> which act as point sources of light.
+            These images can then be used by
+            your
+            deconvolution software to calculate your PSF.</p>
+        <p>Importantly, the PSF for most imaging systems isn’t perfectly uniform--it can vary depending on the imaging
+            location, depth, and even over time. Most deconvolution methods assume that the PSF is consistent throughout
+            the image, meaning that large variations in the PSF can interfere with the deconvolution process. As we’ll
+            see later, current research is focused on finding ways to more accurately estimate and account for
+            variations in the PSF.</p>
+        <h5>Algorithms for Deconvolution</h5>
+        <p>There are a multitude of algorithms out there that can be used to achieve deconvolution. Which one you use
+            most often depends on the software: while some programs allow you to choose from a few different methods,
+            others use their own proprietary algorithms.</p>
+        <p>The first class of algorithms are known as <b>inverse filters</b>, which work by taking an image and using
+            the PSF
+            to back-calculate what the “original,” or deconvoluted, image would have looked like before blurring. These
+            algorithms are the simplest, fastest, and least computationally expensive. However, they are sensitive to
+            noise and can introduce more artefacts into the image.</p>
+        <p>In addition to inverse filters, there are also <b>iterative</b> algorithms, which work by performing multiple
+            iterations to produce a final deconvoluted image. In a nutshell, these algorithms work by estimating the
+            original image, blurring it using the point spread function, and comparing the blurred estimate to the real
+            image. The estimated image is updated, and the process repeats. Iterative algorithms tend to perform better
+            than inverse filters at deconvolution, but are much slower and more computationally intensive [1,2].</p>
+        <img src="./assets/table.jpg" alt="">
+        <img src="./assets/pasted image 0 (2).png" alt="">
+        <p class="img-desc">These images, processed using DeconvolutionLab2, illustrate the difference between a raw
+            image (A) deconvolved using an inverse filter (B) versus two iterative methods (C) and (D). (Image via Sage
+            2017)</p>
+        <h5>Blind Deconvolution</h5>
+        <p><b>Blind deconvolution</b> algorithms are unique in that they do not require a known PSF--instead, they
+            estimate the
+            PSF from the input image. Much of the current research in the deconvolution field is focused on developing
+            blind deconvolution algorithms for microscopy, mostly by improving the PSF estimation step.</p>
+        <p>Blind Deconvolution algorithms have the potential to make deconvolution methods much simpler by removing the
+            requirement of figuring out your PSF. However, blind deconvolution is challenging both in concept and in
+            practice, and for that reason they’re not yet widely available.</p>
+        <h5>Why do Biologists use Deconvolution?</h5>
+        <p>In addition to improving the appearance of fluorescent images, deconvolution can help biologists to
+            distinguish small or subcellular structures by improving image resolution.</p>
+        <p>Although deconvolution is typically applied to wide field fluorescence microscopy, it also has applications
+            in confocal microscopy, light sheet imaging, and structured illumination microscopy.</p>
+        <p>In wide field imaging, the objective takes in all the fluorescent light that is emitted from the sample--even
+            the light that is not currently in focus. This leads to more out of focus light in the image, and more
+            blurring. The additional out of focus light can be removed with deconvolution.</p>
+        <p>Confocal microscopes are designed to capture higher-resolution images than wide field microscopes--they use a
+            pinhole to remove light that is not in focus. However, blur can still affect images captured by confocal
+            microscopes, particularly when imaging thick specimens, and can still be improved by deconvolution methods.
+        </p>
+        <p>Finally, even though we tend to think of advanced imaging methods like light sheet imaging and structured
+            illumination microscopy to be extremely high resolution already, researchers have developed deconvolution
+            methods for these systems as well [3,4].</p>
+        <h5>How can AI be used for Deconvolution?</h5>
+        <p>The challenges posed by deconvolution--especially to the problem of variable PSFs--has led to the idea to
+            apply deep learning to deconvolution.</p>
+        <p>Most deep learning-based approaches to deconvolution attempt to use a Convolutional Neural Network to account
+            for aberrations and estimate a more accurate PSF, before applying a more “conventional” deconvolution
+            algorithm [5-8].</p>
+        <p>However, the biggest opportunity for deep learning in the deconvolution field lies in blind deconvolution and
+            the estimation of point spread functions from already-convoluted images. Since as early as 2010 algorithms
+            have been under development to better estimate PSFs for blind deconvolution [9]. Since then, the research
+            into deep learning-based blind convolution has continued, using Convolutional Neural Networks as well as
+            other methods [10-13]. Even though blind deconvolution is still a challenging problem, this research could
+            lead us to faster, more accurate, and more user friendly methods for deconvolution in the future.</p>
+        <h5>Tools for Biologists to do Deconvolution</h5>
+        <p>If you’re interested in getting started with deconvolution using your own images, you can find a number of
+            options for software, both free and for purchase.</p>
+        <p>The most popular open-source softwares for deconvolution are ImageJ plugins, particularly <a
+                href="http://bigwww.epfl.ch/deconvolution/deconvolutionlab2/">DeconvolutionLab2</a>
+            (which can also be used with Matlab or as a stand-alone program) [1]. This plugin allows you to choose from
+            a variety of algorithms, both linear and iterative.</p>
+        <p>Additionally, one can use the <a href="https://www.optinav.info/Iterative-Deconvolve-3D.htm">Iterative
+                Deconvolve</a> plugin, paired with the <a
+                href="https://www.optinav.info/Diffraction-PSF-3D.htm">Diffraction PSF 3D</a>
+            plugin
+            for
+            generating a theoretical PSF.</p>
+        <p>Many microscope-specific softwares come with deconvolution capabilities as part of their image processing
+            packages, but you can also find deconvolution programs in for-purchase softwares such as <a
+                href="https://svi.nl/Huygens-Deconvolution">Huygens
+                software</a>,
+            <a href="https://www.mediacy.com/autoquantx3">AutoQuant</a> , <a
+                href="https://imaris.oxinst.com/learning/view/article/deconvolution-software-microscopy-images-analysis-gpu">Imaris</a>,
+            and <a
+                href="https://quorumtechnologies.com/index.php/component/content/category/31-volocity-software">Velocity</a>.
+        </p>
+        <h5>Learn More about Deconvolution</h5>
+        <ul>
+            <li>
+                • Olympus Life Sciences: <a
+                    href="https://www.olympus-lifescience.com/en/microscope-resource/primer/digitalimaging/deconvolution/deconintro/">Introduction
+                    to Deconvolution</a>, <a
+                    href="https://www.olympus-lifescience.com/en/resources/white-papers/deconvolution/">Image Processing
+                    with
+                    Deconvolution</a>, <a
+                    href="https://www.olympus-lifescience.com/en/microscope-resource/primer/digitalimaging/deconvolution/deconalgorithms/">Algorithms
+                    for Deconvolution Microscopy</a>
+            </li>
+            <li>• ImageJ Docs: <a href="https://imagej.net/imaging/deconvolution">Deconvolution</a></li>
+            <li>• Photometrics: <a
+                    href="https://www.photometrics.com/learn/spinning-disk-confocal-microscopy/image-restoration-through-deconvolution">Image
+                    Restoration through Deconvolution</a></li>
+            <li>• Scientific Volume Imaging: <a href="https://svi.nl/Huygens-Deconvolution">Huygens Deconvolution:
+                    Restore Microscopy Images</a>, <a href="https://svi.nl/Point-Spread-Function-(PSF)">Point Spread
+                    Function</a>,
+                <a href="https://svi.nl/NyquistCalculator">PSF
+                    Calculator</a>
+            </li>
+            <li>• Laser Focus World: <a href="">A Deconvolution Revolution for Confocal Image Enhancement</a></li>
+            <li>• BiteSize Bio: <a href="">The Point Spread Function in a Nutshell</a></li>
+        </ul>
+        <p>If you have more questions, you can reach out to use at nicholas@biodock.ai. Also check out <a
+                href="index.html">Biodock’s product
+                suite</a> to learn more about our solution to image analysis.</p>
+        <h5>References</h5>
+        <ul>
+            <li>
+                1. Sage et al. “<a href="https://pubmed.ncbi.nlm.nih.gov/28057586/">DeconvolutionLab2: An open-source
+                    software for deconvolution microscopy</a>.”
+                Methods.
+                (2017)
+            </li>
+            <li>2. Sarder & Nehorai. “<a href="https://ieeexplore.ieee.org/document/1628876">Deconvolution methods for
+                    3-D fluorescence microscopy images</a>.” IEEE
+                Signal
+                Processing Magazine. (2006)</li>
+            <li>3. Chakrova et al. “<a
+                    href="https://www.osapublishing.org/josaa/abstract.cfm?uri=josaa-33-7-b12">Deconvolution methods for
+                    structured illumination microscopy</a>.” JOSA
+                A.
+                (2016)</li>
+            <li>4. Becker at al. “<a href="https://www.nature.com/articles/s41598-019-53875-y">Deconvolution of light
+                    sheet microscopy recordings</a>.” Scientific
+                Reports. (2019)</li>
+            <li>5. Bethalgady & Royer. “<a
+                    href="https://www.nature.com/articles/s41592-019-0458-z?proof=t">Applications, promises, and
+                    pitfalls of deep learning for
+                    fluorescence image
+                    reconstruction</a>.” Nat Methods. (2019)</li>
+            <li>6. Weigert et al. “<a href="https://link.springer.com/chapter/10.1007/978-3-319-66185-8_15">Isotropic
+                    Reconstruction of 3D Fluorescence Microscopy Images Using
+                    Convolutional
+                    Neural Networks</a>.” MICCAI. (2017)</li>
+            <li>7. Phatak, Abhijeet. “<a
+                    href="https://www.semanticscholar.org/paper/3-D-Deconvolution-with-Deep-Learning-Phatak-Lab/d7e9866a9aa20d15d3681b1466da4b4b5320d0ca">3D
+                    Deconvolution with Deep Learning</a>” Stanford Libraries. 2018</li>
+            <li>8. Zhao et al. “<a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/jbio.201960147">A new deep
+                    learning method for image deblurring in optical microscopic
+                    systems</a>.” J
+                Biophot. (2019)</li>
+            <li>9. Kenig et al. “<a href="https://ieeexplore.ieee.org/document/5432190">Blind image deconvolution using
+                    machine learning for three-dimensional
+                    microscopy</a>.”
+                IEEE. (2010)</li>
+            <li>10. Shajkofci, Liebling. “<a href="https://ieeexplore.ieee.org/document/8451736">Semi-Blind
+                    Spatially-Variant Deconvolution in Optical Microscopy
+                    with Local
+                    Point Spread Function Estimation by Use of Convolutional Neural Networks</a>.” IEEE. (2018)</li>
+        </ul>
+    </section>
+
+    <section class="card-deck">
+        <ul class="cards">
+            <li class="cards_item">
+                <div class="card">
+                    <div class="card_image"><img src="./assets/cover_image-1.png"></div>
+                    <div class="card_content">
+                        <h5 class="card_title">Integrating scRNAseq and spatial sequencing drives new findings on
+                            leprosy</h5>
+                        <p class="card_text">In a recent paper by Ma et. al. from the Modlin group at UCLA,
+                            researchers report new insights into how the immune system controls leprosy within
+                            granulomas using a powerful combination of spatial and non-spatial sequencing and
+                            dataset...</p>
+                        <a href="integrating-scrnaseq-and-spatial-sequencing.html"><button
+                                class="btn button card_btn">Read More</button></a>
+                    </div>
+                </div>
+            </li>
+            <li class="cards_item">
+                <div class="card">
+                    <div class="card_image"><img src="./assets/cover_image-2.png"></div>
+                    <div class="card_content">
+                        <h5 class="card_title">More data, more problems: Perspectives on challenges in large-scale
+                            analysis</h5>
+                        <p class="card_text">Advances in high-parameter imaging technologies over the past several
+                            decades created an exponential increase in the complexity of imaging datasets. In this
+                            article, we’ll cover: in situ imaging technologies, deep learning for image analysis...
+                        </p>
+                        <a href="bioimage-analysis-challenges.html"><button class="btn button card_btn">Read
+                                More</button></a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </section>
+
+    <footer>
+        <div class="brand">
+            <div class="part1">
+                <img src="./assets/logo.png" alt="" class="logo" />
+                <h1 class="logoname"><b>Lumenbios</b></h1>
+                <div class="socials">
+                    <a href=""><i class="uil uil-instagram"></i></a>
+                    <a href=""><i class="uil uil-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/company/lumenbios"><i class="uil uil-linkedin-alt"></i></a>
+                </div>
+            </div>
+            <div class="part2">
+                <p>Committed to science everywhere. Partner with us to push the frontier of AI for biological
+                    applications.</p>
+            </div>
+        </div>
+        <div class="quick-links">
+            <p class="heading">QUICK LINKS</p>
+            <a href="index.html#contact">Signup</a>
+            <a href="">Careers</a>
+            <a href="">Product brochure</a>
+        </div>
+        <div class="support">
+            <p class="heading">SUPPORT</p>
+            <a href="index.html#contact">Contact us</a>
+            <a href="">Documentation</a>
+            <a href="index.html#blog">Blog</a>
+        </div>
+        <div class="legal">
+            <p class="heading">LEGAL</p>
+            <a href="">Privacy Policy</a>
+            <a href="">Terms of Services</a>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>

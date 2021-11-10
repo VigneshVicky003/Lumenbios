@@ -131,6 +131,7 @@ h6 {
 
 .to-top {
   border: 3px solid #c495f0;
+  border-radius: 5px;
   border-image-slice: 1;
   position: fixed;
   z-index: 999;
@@ -351,7 +352,7 @@ h3 {
   vertical-align: middle;
 }
 
-.card_content > .btn {
+.card_content > a > .btn {
   color: #161e2e;
   padding: 0.8rem;
   display: block;
@@ -362,7 +363,7 @@ h3 {
   background: transparent;
 }
 
-.card_content > .btn:hover {
+.card_content > a > .btn:hover {
   background-color: #c495f0;
 }
 .card_content h5 {
@@ -514,7 +515,7 @@ textarea {
 
 /* footer */
 footer {
-  background-color: #130422;
+  background-color: #161e2e;
   /* height: 50vh; */
   padding: 5% 10%;
   color: white;

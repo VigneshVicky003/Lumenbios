@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="blog.css" />
+    <link rel="icon" href="./assets/logo.png" />
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <title>Spatial sequencing drives new findings on leprosy</title>
+</head>
+
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <h6>
+                <a href="index.html#" class="nav-logo">Lumenbios<img src="./assets/logo.png" alt="" /></a>
+            </h6>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html#" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#AI-Analysis" class="nav-link">AI analysis</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#blog" class="nav-link">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#contact" class="nav-link">Contact us</a>
+                </li>
+                <li class="nav-button button nav-item">
+                    <a href="index.html#contact" class="nav-link">Get Started</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- scroll to top button -->
+    <a href="#" class="to-top">
+        <i class="uil uil-angle-double-up"></i>
+    </a>
+
+    <section class="blog">
+        <h1>Integrating scRNAseq and spatial sequencing drives new findings on leprosy</h1>
+        <h4>In a recent paper by Ma et. al. from the Modlin group at UCLA, researchers report new insights into how the
+            immune system controls leprosy within granulomas using a powerful combination of spatial and non-spatial
+            sequencing and dataset integration.</h4>
+        <img src="./assets/cover_image-1.png" alt="">
+        <p>Single-cell transcriptomics has grown tremendously in popularity and accessibility within the life sciences
+            since the first <a href="https://pubmed.ncbi.nlm.nih.gov/19349980/">proof-of-principle paper</a> was
+            published in 2009. Chosen as the Nature Methods method
+            of the
+            year in <a
+                href="http://blogs.nature.com/methagora/2013/12/the-method-of-the-year-for-2013-is-single-cell-sequencing.html">2013</a>,
+            commercial entities (Illumina, Pac Bio, 10x Genomics) now largely dominate the single-cell
+            library preparation and sequencing ecosystem. Spatial sequencing, the younger sibling of scRNAseq (and
+            <a href="https://www.nature.com/articles/s41592-020-01033-y">2021
+                method of the year!</a>), one-ups scRNAseq in allowing researchers to map transcripts onto cellular and
+            tissue
+            architecture and understand the context of mRNA expression. Although fully spatially resolved single-cell
+            transcriptomes are not yet possible, many researchers in this fast-moving field are optimistic that <a
+                href="https://www.nature.com/articles/s41592-020-01033-y">it’s
+                coming soon</a>. Similarly, computational methods that leverage spatial information—taking into account
+            cellular
+            neighbors, for instance—are still in early days, but new methods are reported at a rapid pace. Although
+            managing data across different platforms and finding optimal methods to integrate spatial and non-spatial
+            data remains a challenge, many groups have applied a combination of scRNAseq and spatial sequencing to
+            report new insights around things like brain architecture and embryo development. In a <a
+                href="https://www.nature.com/articles/s41590-021-00956-8">recent paper</a>
+            by Ma
+            et. al. from the Modlin group at UCLA, researchers report new insights into how the immune system controls
+            leprosy within granulomas using this mix of spatial and non-spatial sequencing and dataset integration.
+        </p>
+        <img src="./assets/spatial_seq.jpg" alt="">
+        <p class="img-desc">In spatial sequencing, tissue sections are overlaid onto a glass microchip spotted with mRNA
+            capture probes containing unique position-specific barcodes. The probes and their attached mRNA molecules
+            are reverse transcribed and sequenced. Image from <a
+                href="https://spatialtranscriptomics.com/technology/">10x Genomics</a>.</p>
+        <p>Granulomas—immune-cell-rich structures that form within chronically infected tissues—are the body’s attempt
+            to sequester and kill pathogens that have evaded an acute immune response. Although most commonly associated
+            with tuberculosis, granulomas are also a hallmark of leprosy, caused by the bacterium Mycobacterium leprae.
+            The human response to M. leprae spans a dynamic continuum ranging from a self-limiting infection referred to
+            as tuberculoid (T-lep) to chronic infection (lepromatous leprosy, or L-lep) characterized by abundant skin
+            lesions. Patients can “upgrade” from L-lep to T-lep spontaneously and begin to mount an effective
+            antimicrobial defense to clear infection, a process referred to as a reversal reaction (RR). Ma et al.
+            investigate the cellular architecture and functional characteristics of granulomas associated with RR in
+            order to further our understanding of what makes a granuloma effective.</p>
+        <p>The authors first perform scRNAseq on skin biopsy samples from five patients with L-lep and five patients
+            that had undergone reversal to T-lep (RR samples). Clustering analysis identified 12 general cell types
+            shared by all patients. These included myeloid cells and T-lymphocytes, which generally make up the majority
+            of a granuloma, as well as skin-specific cells such as fibroblasts and keratinocytes. The authors then
+            subset the myeloid and T-cell compartments to look more closely at immune cell phenotypes. Uncontrolled
+            infection L-lep samples contained significantly more macrophage subsets expressing antiviral response genes
+            (annotated as ML1 cells) as well as macrophages expressing altered lipid metabolism genes (ML2 cells). On
+            the other hand, samples from patients undergoing reversal were abundant in dendritic cells and M1-like
+            macrophages (ML4 cells). An additional macrophage subset, ML3, represented a transition population between
+            the L-lep dominant ML2 subset and the RR dominant ML4 subset. The authors then used pseudotime analysis to
+            infer a trajectory from the ML2 macrophage state to the ML4 state, with ML3 as a transition state. The
+            cytokines IL1β and IFNγ were identified as upstream drivers of this trajectory, turning on dozens of
+            antimicrobial genes with known direct bactericidal effects again M. leprae.</p>
+        <p>Next, the authors generated a complementary spatial sequencing dataset from skin biopsy samples containing
+            granulomas using the <a href="https://www.10xgenomics.com/products/spatial-gene-expression">Visium
+                platform</a> (10x Genomics). Using cell-specific expression matrices from the
+            existing scRNAseq dataset, cell type composition for each spatially sequenced spot was determined. The
+            concordance of cell type-specific antimicrobial gene expression between the single-cell and spatial datasets
+            was high, and spatial sequencing allowed the authors to visualize the architecture of the various immune
+            subsets and expression of key antimicrobial genes within the granuloma structure. Notably, in RR and T-lep
+            granulomas, ML3 (transition) and ML4 (M1-like) macrophages formed the core of a relatively organized
+            structure, with lymphocytes and dendritic cells in the “mantle” zone surrounding this core. In contrast, in
+            L-lep granulomas, ML2 macrophages and antiviral macrophages predominated, perhaps limiting the extent of
+            antimicrobial gene expression by immune cells in the vicinity and contributing to uncontrolled infection.
+            Importantly, the combination of spatial and single-cell transcriptome sequencing identified new roles for
+            fibroblasts and keratinocytes, found on the periphery of the granuloma structure. Antimicrobial gene
+            expression in these subsets was spatially mapped onto cell-type-resolved granuloma maps. The authors suggest
+            these non-immune cell types may play an important role in antimicrobial gene expression and bacterial
+            control.</p>
+        <img src="./assets/paper_model.png" alt="">
+        <p class="img-desc">Ma et al. (2021) diagram the cellular architecture of a leprosy granuloma, with
+            antimicrobial genes expressed by various immune and non-immune cells annotated. </p>
+        <p>These exciting findings generate many new avenues of investigation. For example, do dendritic cells or T
+            cells influence the antimicrobial expression of nearby fibroblasts and keratinocytes? Similarly, are changes
+            in cell-cell interaction related to increased expression of IL1β and IFNγ? Additional technical progress in
+            spatial sequencing, such as obtaining higher resolution to approach single-cell localization and increasing
+            the number of genes detected per imaged region, will go a long way towards answering questions like this.
+            Similarly, development of spatial-sequencing-specific analysis methods that leverage cell-proximity
+            information will also serve to clarify the underlying biology of an evolving granuloma.</p>
+    </section>
+
+    <section class="card-deck">
+        <ul class="cards">
+            <li class="cards_item">
+                <div class="card">
+                    <div class="card_image"><img src="./assets/cover_image-2.png"></div>
+                    <div class="card_content">
+                        <h5 class="card_title">More data, more problems: Perspectives on challenges in large-scale
+                            analysis</h5>
+                        <p class="card_text">Advances in high-parameter imaging technologies over the past several
+                            decades created an exponential increase in the complexity of imaging datasets. In this
+                            article, we’ll cover: in situ imaging technologies, deep learning for image analysis...
+                        </p>
+                        <a href="bioimage-analysis-challenges.html"><button class="btn button btn3 card_btn">Read
+                                More</button></a>
+                    </div>
+                </div>
+            </li>
+            <li class="cards_item">
+                <div class="card">
+                    <div class="card_image"><img src="./assets/cover_image-3.png"></div>
+                    <div class="card_content">
+                        <h5 class="card_title">Image Deconvolution: How it works and how to use it for microscopy
+                        </h5>
+                        <p class="card_text">An introduction to deconvolution for biologists: what it is, how it
+                            works, tools for biologists to do deconvolution, and more resources. If you’re familiar
+                            with microscopy imaging--particularly fluorescent imaging--you may have heard of
+                            deconvolution as...</p>
+                        <a href="image-deconvolution.html"><button class="btn button btn3 card_btn">Read
+                                More</button></a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </section>
+
+    <footer>
+        <div class="brand">
+            <div class="part1">
+                <img src="./assets/logo.png" alt="" class="logo" />
+                <h1 class="logoname"><b>Lumenbios</b></h1>
+                <div class="socials">
+                    <a href=""><i class="uil uil-instagram"></i></a>
+                    <a href=""><i class="uil uil-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/company/lumenbios"><i class="uil uil-linkedin-alt"></i></a>
+                </div>
+            </div>
+            <div class="part2">
+                <p>Committed to science everywhere. Partner with us to push the frontier of AI for biological
+                    applications.</p>
+            </div>
+        </div>
+        <div class="quick-links">
+            <p class="heading">QUICK LINKS</p>
+            <a href="index.html#contact">Signup</a>
+            <a href="">Careers</a>
+            <a href="">Product brochure</a>
+        </div>
+        <div class="support">
+            <p class="heading">SUPPORT</p>
+            <a href="index.html#contact">Contact us</a>
+            <a href="">Documentation</a>
+            <a href="index.html#blog">Blog</a>
+        </div>
+        <div class="legal">
+            <p class="heading">LEGAL</p>
+            <a href="">Privacy Policy</a>
+            <a href="">Terms of Services</a>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>
